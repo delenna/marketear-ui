@@ -1,60 +1,45 @@
 <template>
     <div class="table-responsive">
-        <a-table :data-source="dataSource" :columns="columns">
-            <template #bodyCell="{ column }">
-                <template v-if="column.key == 'action'">
-                    <router-link class="btn btn-primary" :to="{ name: 'Campaign Detail'}">Detail</router-link>
-                    <!-- <button class="btn btn-primary">Detail</button> -->
-                </template>
+        <MyTable
+            :columns="columns"
+            :use-row-selection="false"
+            :url="'/campaign/'+$route.params.campaignId"
+        >
+            <template #slot-column-1="{ rowData }">
+                <img :src="rowData.thumbnail" >
             </template>
-        </a-table>
+        </MyTable>
     </div>
 </template>
 <script>
-import Table from "ant-design-vue/lib/table"; // for js
-import "ant-design-vue/lib/table/style/css"; // for css
 import { defineComponent } from "vue";
+import MyTable from "../../../components/MyTable.vue";
 
 export default defineComponent ({
     components: {
-        ATable: Table,
+        MyTable,
     },
     setup() {
         return {
-            dataSource: [
+            columns: [
                 {
-                    key: '1',
-                    name: 'Campaign Tolak Angin',
-                    date: "10 Januari 2023",
-                    total: '10',
+                    title: 'Thumbnail',
+                    key: 1,
                 },
                 {
-                    key: '2',
-                    name: 'Campaign Masuk angin',
-                    date: "11 Januari 2023",
-                    total: '3',
-                },
-                ],
-
-                columns: [
-                {
-                    title: 'Name',
-                    dataIndex: 'name',
-                    key: 'name',
+                    title: 'Creator',
+                    dataIndex: 'username',
+                    key: 2,
                 },
                 {
-                    title: 'Date',
-                    dataIndex: 'date',
-                    key: 'date',
+                    title: 'Views',
+                    dataIndex: 'comment_count',
+                    key: 3,
                 },
                 {
-                    title: 'Total Post',
-                    dataIndex: 'total',
-                    key: 'total',
-                },
-                {
-                    title: 'Action',
-                    key: 'action',
+                    title: 'Comments',
+                    dataIndex: 'collect_count',
+                    key: 4
                 },
             ],
         };

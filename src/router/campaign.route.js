@@ -7,7 +7,7 @@ const route = [
         component: ListCampaign
     },
     {
-        path: "/campaign/detail",
+        path: "/campaign/:campaignId",
         name: "Campaign Detail",
         component: DetailCampaign
     }

@@ -20,10 +20,10 @@
                             <MDBTabContent>
                             <MDBTabPane tabId="ex1-1">Content #1</MDBTabPane>
                             <MDBTabPane tabId="ex1-2">
-                                <ListIntent />
+                                <ListUrlVue />
                             </MDBTabPane>
                             <MDBTabPane tabId="ex1-3">
-                                <ListUrlVue />
+                                <ListIntent />
                             </MDBTabPane>
                             </MDBTabContent>
                             <!-- Tabs content -->

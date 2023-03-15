@@ -25,8 +25,8 @@
                                 :use-row-selection="false"
                                 :url="'/campaign'"
                             >
-                                <template #slot-column-4>
-                                    <router-link class="btn btn-primary" :to="{ name: 'Campaign Detail'}">Detail</router-link>
+                                <template #slot-column-4="{ rowData }">
+                                    <router-link class="btn btn-primary" :to="{ name: 'Campaign Detail', params: { campaignId: rowData.id }}">Detail</router-link>
                                 </template>
                             </MyTable>
                         </div>
@@ -86,7 +86,7 @@ import {
   } from 'mdb-vue-ui-kit';
 import MyTable from "../../../components/MyTable.vue";
 
-import axios from "axios";
+// import axios from "axios";
 
 export default defineComponent ({
     components: {
@@ -105,14 +105,12 @@ export default defineComponent ({
         const visible = ref(false);
         const form = ref({
             title: null,
-            url: [{
-                value: ""
-            }]
+            url: []
         });
         
         //Modal 
         const addUrl = () => {
-            form.value.url.push({ value:"" });
+            form.value.url.push("");
         };
         const showModal = () => {
             visible.value = true;
@@ -121,12 +119,13 @@ export default defineComponent ({
         
         const submitCampaign = async () => {
             console.log("submited", form.value);
-            try {
-                const response = await axios.post("http://127.0.0.1:8000/api/tiktok/scrape", form.value);
-                console.log("respone", response);
-            } catch (err) {
-                console.log("err", err);
-            }
+            return;
+            // try {
+            //     const response = await axios.post("http://127.0.0.1:8000/api/tiktok/scrape", form.value);
+            //     console.log("respone", response);
+            // } catch (err) {
+            //     console.log("err", err);
+            // }
         };
 
         return {
