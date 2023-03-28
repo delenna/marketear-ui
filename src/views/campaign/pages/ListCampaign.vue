@@ -86,7 +86,7 @@ import {
   } from 'mdb-vue-ui-kit';
 import MyTable from "../../../components/MyTable.vue";
 
-// import axios from "axios";
+import axios from "axios";
 
 export default defineComponent ({
     components: {
@@ -110,7 +110,7 @@ export default defineComponent ({
         
         //Modal 
         const addUrl = () => {
-            form.value.url.push("");
+            form.value.url.push({value: ""});
         };
         const showModal = () => {
             visible.value = true;
@@ -118,14 +118,17 @@ export default defineComponent ({
         };
         
         const submitCampaign = async () => {
-            console.log("submited", form.value);
-            return;
-            // try {
-            //     const response = await axios.post("http://127.0.0.1:8000/api/tiktok/scrape", form.value);
-            //     console.log("respone", response);
-            // } catch (err) {
-            //     console.log("err", err);
-            // }
+            let url = form.value.url.map((v) => v.value);
+            let newdata = { 
+                ...form.value,
+                url
+            };
+            try {
+                const response = await axios.post(process.env.VUE_APP_API_URL + "/api/campaign/create", newdata);
+                console.log("respone", response);
+            } catch (err) {
+                console.log("err", err);
+            }
         };
 
         return {

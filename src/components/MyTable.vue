@@ -86,11 +86,11 @@
         console.log("initiate param", currentPage.value);
         if (moduleType.value == "omni") {
           if (method.value == "post") {
-            return axios.post("http://127.0.0.1:8000/api" + url.value, {
+            return axios.post(process.env.VUE_APP_API_URL + url.value, {
               ...params,
             });
           } else if (currentPage.value.length > 0) {
-            return axios.get("http://127.0.0.1:8000/api" + url.value, {
+            return axios.get(process.env.VUE_APP_API_URL + url.value, {
               params: {
                 ...params,
                 page: currentPage.value,
@@ -98,7 +98,7 @@
             });
           } else {
             // console.log("payload params", params);
-            return axios.get("http://127.0.0.1:8000/api" + url.value, {
+            return axios.get(process.env.VUE_APP_API_URL + url.value, {
               params: {
                 ...params,
                 // per_page: perPage.value,
@@ -107,11 +107,11 @@
           }
         } else {
           if (method.value == "post") {
-            return httpClientBot.post("http://127.0.0.1:8000/api" + url.value, {
+            return httpClientBot.post(process.env.VUE_APP_API_URL + url.value, {
               ...params,
             });
           } else {
-            return httpClientBot.get("http://127.0.0.1:8000/api" + url.value, {
+            return httpClientBot.get(process.env.VUE_APP_API_URL + url.value, {
               params,
             });
           }
